@@ -1,0 +1,43 @@
+<div class="input-append">
+  <input type="text" ng-model="query" ng-change="search()" class="input-large search-query" placeholder="Search">
+  <span class="add-on"><i class="icon-search"></i></span>
+</div>
+<table class="table table-striped table-condensed table-hover">
+  <thead>
+    <tr>
+      <th class="id">Id&nbsp;<a ng-click="sort_by('id')"><i class="icon-sort"></i></a></th>
+      <th class="name">Name&nbsp;<a ng-click="sort_by('name')"><i class="icon-sort"></i></a></th>
+      <th class="designation">Designation&nbsp;<a ng-click="sort_by('designation')"><i class="icon-sort"></i></a></th>
+      <th class="employeeid">Employee ID&nbsp;<a ng-click="sort_by('employeeid')"><i class="icon-sort"></i></a></th>
+      <th class="email">Email&nbsp;<a ng-click="sort_by('email')"><i class="icon-sort"></i></a></th>
+      <th class="location">Location&nbsp;<a ng-click="sort_by('location')"><i class="icon-sort"></i></a></th>
+    </tr>
+  </thead>
+  <tfoot>
+    <td colspan="6">
+      <div class="pagination pull-right">
+        <ul>
+          <li ng-class="{disabled: currentPage == 0}">
+            <a href ng-click="prevPage()">« Prev</a>
+          </li>
+          <li ng-repeat="n in range(pagedItems.length)" ng-class="{active: n == currentPage}" ng-click="setPage()">
+            <a href ng-bind="n + 1">1</a>
+          </li>
+          <li ng-class="{disabled: currentPage == pagedItems.length - 1}">
+            <a href ng-click="nextPage()">Next »</a>
+          </li>
+        </ul>
+      </div>
+    </td>
+  </tfoot>
+  <tbody>
+    <tr ng-repeat="item in pagedItems[currentPage] | orderBy:sortingOrder:reverse">
+      <td>{{ item.id  }}</td>
+      <td>{{ item.name  }}</td>
+      <td>{{ item.designation  }}</td>
+      <td>{{ item.employeeid  }}</td>
+      <td><a href="mailto:{{ item.email  }}">{{ item.email  }}</a></td>
+      <td>{{ item.location  }}</td>
+    </tr>
+  </tbody>
+</table>

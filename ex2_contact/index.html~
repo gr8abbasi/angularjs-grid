@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>XML Parser with Angularjs and Bootstrap</title>
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.js"></script>
+    <script src="app.js"></script>
+    <script src="controllers.js"></script>
+</head>
+<body ng-app="contactApp" >
+    <div class="vertical-bottom">
+        <div class="container">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2 class="panel-title">XML Parser</h2>
+                </div>
+                <div ng-controller="ContactController" class="panel-body">
+                    <form ng-submit="submit(contactform)" name="contactform" method="post" action="" class="form-horizontal" role="form">
+                        <div class="form-group" ng-class="{ 'has-error': contactform.inputName.$invalid && submitted }">
+                            <label for="inputName" class="col-lg-2 control-label">URL</label>
+                            <div class="col-lg-10">
+                                <input ng-model="formData.inputName" type="text" class="form-control" id="inputName" name="inputName" placeholder="Enter File URL" required>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-offset-2 col-lg-10">
+                                <button type="submit" class="btn btn-default" ng-disabled="submitButtonDisabled">
+                                    Submit
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    <p ng-class="result" style="padding: 15px; margin: 0;">{{ resultMessage }}</p>
+                </div>
+            </div>
+        </div>
+
+
+<div class="container">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2 class="panel-title">Products</h2>
+                </div>
+                <div ng-controller="ContactController" class="panel-body">
+                    <table border="1" style="width:100%">
+<thead>
+<tr>
+<th>ProductID</th>
+<th>Name</th>
+<th>Price</th>
+<th>ProductURL</th>
+<th>ImageURL</th>
+<th>Description</th>
+<th>Category</th>
+<th>Additional</th>
+</tr>
+</thead>
+<tbody id="products">
+
+<tr ng-repeat="x in products">
+	<td>{{ x.productID }}</td>
+	<td>{{ x.name }}</td>
+	<td>{{ x.price }}</td>
+    	<td>{{ x.productURL }}</td>
+	<td>{{ x.imageURL }}</td>
+    	<td>{{ x.description }}</td>
+	<td>{{ x.category }}</td>
+    	<td>{{ x.additional }}</td>
+</tr>
+</tbody>
+</table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
