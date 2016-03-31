@@ -1,31 +1,24 @@
 app.controller('ContactController', function ($scope, $http) {
 
-var source = new EventSource("http://localhost:8080");
+    var source = new EventSource("http://localhost:8080");
 
-$scope.products = [
+    $scope.products = [
         {productID: 'Laurent', name: 'Renard', price: new Date('1987-05-21'), productURL: 102, imageURL: 'whatever@gmail.com'},
         {productID: 'Blandine', name: 'Faivre', price: new Date('1987-04-25'), productURL: -2323.22, imageURL: 'oufblandou@gmail.com'},
         {productID: 'Francoise', name: 'Frere', price: new Date('1955-08-27'), productURL: 42343, imageURL: 'raymondef@gmail.com'}
     ];
 
-			source.addEventListener("message", function(e) {
-				obj = JSON.parse(e.data);
-$scope.products.push(
-        {productID: 'Laurent', name: 'Renard', price: new Date('1987-05-21'), productURL: 102, imageURL: 'whatever@gmail.com'},
-        {productID: 'Blandine', name: 'Faivre', price: new Date('1987-04-25'), productURL: -2323.22, imageURL: 'oufblandou@gmail.com'},
-        {productID: 'Francoise', name: 'Frere', price: new Date('1955-08-27'), productURL: 42343, imageURL: 'raymondef@gmail.com'}
-    );
+    source.addEventListener("xmlparser", function(e) {
+        obj = JSON.parse(e.data);
+        alert('hello');
+        var myEl = angular.element( document.querySelector( '#products' ) );
+        myEl.append('<tr><td>'+obj.productID[0]+'</td><td>'+obj.name[0]+'</td><td>'+obj.price[0]+'</td><td>'+obj.productURL[0]+'</td><td>'+obj.imageURL[0]+'</td><td>'+obj.description[0]+'</td><td>'+obj.categories[0]+'</td><td>'+obj.additional[0]+'</td></tr>');
 
 
-alert('hello');
-var myEl = angular.element( document.querySelector( '#products' ) );
-myEl.append('<tr><td>'+obj.productID[0]+'</td><td>'+obj.name[0]+'</td><td>'+obj.price[0]+'</td><td>'+obj.productURL[0]+'</td><td>'+obj.imageURL[0]+'</td><td>'+obj.description[0]+'</td><td>'+obj.categories[0]+'</td><td>'+obj.additional[0]+'</td></tr>');
 
-           
-	
-				//updatePrice(e.data);
-				//logMessage(e);
-			}, false);
+        //updatePrice(e.data);
+        //logMessage(e);
+    }, false);
 
     $scope.result = 'hidden'
     $scope.resultMessage;
